@@ -37,7 +37,7 @@ int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*get_main)();
 
-void (*old_onRecoil) (void*instance);
+void (*old_noRecoil) (void*instance);
 void noRecoil(void*instance) {
 if (instance!=NULL && NoRecoil) {
 return;
