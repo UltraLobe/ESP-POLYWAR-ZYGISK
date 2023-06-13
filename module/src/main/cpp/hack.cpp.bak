@@ -37,6 +37,14 @@ int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*get_main)();
 
+void (*old_onRecoil) (void*instance);
+void noRecoil(void*instance) {
+if (instance!=NULL && NoRecoil) {
+return;
+}
+return old_noRecoil(instance) ;
+}
+
 /*bool (*old_noRecoil) (void *instance) ;
 bool noRecoil (void *instance) {
 if (instance!=NULL) {
@@ -115,7 +123,7 @@ void hack_start(const char *_game_data_dir) {
     // TODO: hooking/patching here
   //  DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1cae0fc), (void *) noRecoil, (void **) &old_noRecoil);//class role, method: Boolean IgnoreRecoil() { }
     
-     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
+    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
     get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
     get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
