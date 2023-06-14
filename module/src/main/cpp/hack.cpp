@@ -53,9 +53,9 @@ void *(*C_get_main)();
 
 void (*old_noRecoil) (void*instance);
 void noRecoil(void*instance) {
-espManager->tryAddEnemy(instance);
 if (instance!=NULL && NoRecoil) {
-return;
+espManager->tryAddEnemy(instance);
+//return;
 }
 return old_noRecoil(instance) ;
 }
