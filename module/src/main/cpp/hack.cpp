@@ -19,7 +19,7 @@
 #include "Unity/Vector2.h"
 #include "Unity/Vector3.h"
 #include "Unity/Rect.h"
-#include "Obscured.h"
+#include "Unity/Obscured.h"
 #include "includes/ESPManager.h"
 #include "includes/ESPOverlay.h"
 //#include "Unity/Obscured.h
@@ -185,9 +185,9 @@ void hack_start(const char *_game_data_dir) {
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147306C), (void *) upDate, (void **) &old_upDate);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x15AE930), (void*) updateWeapon,(void**)&old_updateWeapon);                  
                                            
-    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
-    get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
-    get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
+    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
+    get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int get_systemWidth() { }
+    get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int get_systemHeight() { }
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
      
     get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0xD16C40);
