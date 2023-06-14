@@ -85,16 +85,16 @@ if (espLine || espRectangle) {
 for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
     if (obj != NULL) {
-        Vector3 objPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)));
+        Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
            continue;
-           Vector3 objHeadPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
+           Vector3 objHeadPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
            Vector2 toTarget = Vector2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);
            float rectHeight = abs(objHeadPos.y - objPos.y);
            float rectWidth = 0.6 * rectHeight;
            Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight(D_get_main()) - objPos.y, rectWidth, -rectHeight);
            if (espLine){
-          ESP::DrawLine(Vector2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main()), toTarget), ImColor(255, 255, 255, 255), 2);
+          ESP::DrawLine(Vector2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())) toTarget), ImColor(255, 255, 255, 255), 2);
               }
            if (espRectangle)
               ESP::DrawBox(rectSize, ImColor(255, 0, 0, 255), 2);
@@ -165,7 +165,7 @@ void hack_start(const char *_game_data_dir) {
     get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
     get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule_start_address + 0x12355);
     WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule_start_address + 0x12345);
-    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356); 
+    C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x12356); 
     
     
     

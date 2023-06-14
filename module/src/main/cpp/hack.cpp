@@ -163,8 +163,8 @@ void hack_start(const char *_game_data_dir) {
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
      
     get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
-    get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule_start_address + 0x12355);
-    WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule_start_address + 0x12345);
+    get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12355);
+    WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
     C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x12356); 
     
     
