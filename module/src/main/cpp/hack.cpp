@@ -16,8 +16,8 @@
 #include "includes/ESPOverlay.h"
 #include "includes/ESPManager.h"
 #include "Unity/Rect.h"
-#include "Unity/Vector2"
-#include "Unity/Vector3"
+#include "Unity/Vector2.h"
+#include "Unity/Vector3.h"
 //#include "Unity/Obscured.h
 #include "imgui_impl_android.h"
 #include "imgui_impl_opengl3.h"
