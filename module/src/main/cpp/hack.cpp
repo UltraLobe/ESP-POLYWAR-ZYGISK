@@ -64,9 +64,10 @@ return old_noRecoil(instance);
 void (*old_upDate)(void *instance);
 void upDate(void *instance){
 if (instance!=NULL){
-if (get_Team(instance)){
+bool dead = *(bool *) ((uintptr_t) instance + 0x18);
+if (get_Team(instance) && !dead)
 espManager->tryAddEnemy(instance);
-}else{
+else
 espManager->removeEnemyGivenObject(instance);
   }
 }
