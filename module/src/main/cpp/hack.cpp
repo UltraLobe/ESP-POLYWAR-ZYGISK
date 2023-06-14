@@ -53,28 +53,29 @@ Vector3 (*get_position)(void *instance);
 Vector3 (*WorldToScreenPoint)(void *instance, Vector3 position);
 void *(*C_get_main)(); 
 int (*get_Team)(void *instance);
+int (*get_Owner)(void *instance);
 
 
 
-void (*old_upDate)(void *instance);
-void upDate(void *instance){
-if (instance!=NULL){
-bool dead = *(bool *) ((uintptr_t) instance + 0x28);
-if (get_Team(instance) && !dead)
-espManager->tryAddEnemy(instance);
-else
-espManager->removeEnemyGivenObject(instance);
-}
+void (*old_upDate)(void*instance);
+void upDate(void*instance){
+	if (instance!=NULL){
+		bool dead = *(bool *) ((uintptr_t) instance + 0x28);//class Pawn, field: bool dead, 
+		if (get_Team(instance) && get_Owner(instance) && !dead)
+		    espManager->tryAddEnemy(instance);
+	        else
+		        espManager->removeEnemyGivenObject(instance); 
+		        }
 old_upDate(instance);
 }
 
-void (*old_onDestroy)(void *instance);
-void onDestroy(void *instance){
-if (instance!=NULL){
-espManager->removeEnemyGivenObject(instance);
-}
-old_onDestroy(instance);
-}
+void (*old_onDestroy)(void*instance);
+void onDestroy(void*instance){
+	if (instance!=NULL){
+	espManager->removeEnemyGivenObject(instance);
+	    }
+	old_onDestroy(instance);
+   }
 
 /*void (*old_noRecoil) (void*instance);
 void noRecoil(void*instance) {
@@ -222,7 +223,7 @@ void hack_start(const char *_game_data_dir) {
     WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule.start_address + 0xD13944);
     C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD13EE0); 
     get_Team = (int (*) (void*)) ((uintptr_t) g_TargetModule.start_address + 0x1466B78);
-    
+    get_Owner = (int (*) (void*)) ((uintptr_t) g_TargetModule.start_address + 0x1676BD4);
     
     
     libLoaded = true;
