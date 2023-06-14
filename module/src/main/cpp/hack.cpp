@@ -13,6 +13,12 @@
 #include "utils.h"
 #include "xdl.h"
 #include "imgui.h"
+#include "includes/ESPOverlay.h"
+#include "includes/ESPManager.h"
+#include "Unity/Rect.h"
+#include "Unity/Vector2"
+#include "Unity/Vector3"
+#include "Unity/Obscured.h
 #include "imgui_impl_android.h"
 #include "imgui_impl_opengl3.h"
 #include "MemoryPatch.h"
@@ -24,6 +30,8 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool NoRecoil;
+bool espLine;
+bool espRectangle;
 
 HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     origInput(thiz, ex_ab, ex_ac);
@@ -33,9 +41,16 @@ HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
 
 
 void (*SetResolution)(int width, int height, bool fullscreen);
-int (*get_systemWidth)(void *instance);
-int (*get_systemHeight)(void *instance);
-void *(*get_main)();
+int (*get.systemWidth)(void *instance);
+int (*get.systemHeight)(void *instance);
+void *(*D_get_main)();
+
+void *(get_transform)(void *instance);
+Vector3 (*get_position)(void *instance);
+Vector3 (*WorldToScreenPoint)(void *instance, Vector3 position);
+void *(*C_get_main)();
+
+
 
 void (*old_noRecoil) (void*instance);
 void noRecoil(void*instance) {
@@ -45,15 +60,6 @@ return;
 return old_noRecoil(instance) ;
 }
 
-/*bool (*old_noRecoil) (void *instance) ;
-bool noRecoil (void *instance) {
-if (instance!=NULL) {
-if (NoRecoil) {
-return true;
-}
-}
-return old_noRecoil(instance) ;
-} */
 
 void SetupImGui() {
     IMGUI_CHECKVERSION();
@@ -73,6 +79,37 @@ void SetupImGui() {
 
     ImGui::GetStyle().ScaleAllSizes(3.0f);
 }
+
+
+void DrawESP(ImDrawList *draw) {
+if (esp.isValid()) {
+if (espLine || espRectangle) {
+if (espManager->enemies.size(); i++) {
+   void *obj = espManager->enemies[i]->object;
+    if (obj != NULL) {
+        Vector3 objPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)));
+        if (objPos.z < 0) 
+           continue;
+           Vector3 objHeadPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
+           Vector2 toTarget = Vector2(objPos.x, get.systemHeight() - objPos.y);
+           float rectHeight = abs(objHeadPos.y - objPos.y);
+           float rectWidth = 0.6 * rectHeight;
+           Rect rectSize = Rect(objPos.x - rectWidth /2, get.systemHeight() - objPos.y, rectWidth, -rectHeight);
+           if (espLine){
+          esp.DrawLine(ImColor(255, 255, 255, 255), 2, Vector2(get.systemWidth(D_get_main()) / 2, get.systemHeight(D_get_main())), toTarget);
+              }
+           if (espRectangle)
+              esp.DrawBox(ImColor(255, 0, 0, 255), 2, rectSize);
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+    
+
+
 
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
 EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
@@ -94,11 +131,16 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplAndroid_NewFrame(g_GlWidth, g_GlHeight);
     ImGui::NewFrame();
+    
+    DrawESP(ImGui::GetBackgroundDrawList());
 
     ImGui::Begin("MGR Team - Sausage Man");
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
             ImGui::Checkbox("No Recoil", &NoRecoil);
+            if (ImGui::BeginTabItem("Esp Menu")) {
+             ImGui::Checkbox("Esp Line", &espLine);
+             ImGui::Checkbox("Esp Rectangle", &espRetangle);
         }
     }
     ImGui::EndTabItem();
@@ -121,17 +163,25 @@ void hack_start(const char *_game_data_dir) {
     LOGI("%s: %p - %p",TargetLibName, g_TargetModule.start_address, g_TargetModule.end_address);
 
     // TODO: hooking/patching here
-  //  DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1cae0fc), (void *) noRecoil, (void **) &old_noRecoil);//class role, method: Boolean IgnoreRecoil() { }
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14711C0), (void *) noRecoil, (void **) &old_noRecoil);
       
       
     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
-    get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
-    get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
-    get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
-
+    get.systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
+    get.systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
+    D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
+     
+    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
+    get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule_start_address + 0x12355);
+    WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule_start_address + 0x12345);
+    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356);
+    
+    
+    
+    
     libLoaded = true;
 }
+
 
 void hack_prepare(const char *_game_data_dir) {
     LOGI("hack thread: %d", gettid());
