@@ -59,10 +59,10 @@ int (*get_Team)(void *instance);
 void (*old_upDate)(void *instance);
 void upDate(void *instance){
 if (instance!=NULL){
-bool dead = *(bool *) ((uintptr_t) instance + 0x28);
-if (get_Team(instance) && !dead)
+//bool dead = *(bool *) ((uintptr_t) instance + 0x28);
+//if (get_Team(instance) && !dead)
 espManager->tryAddEnemy(instance);
-else
+}else{
 espManager->removeEnemyGivenObject(instance);
 }
 old_upDate(instance);
@@ -94,18 +94,18 @@ if (UnlimitedAmmo){
 return old_updateWeapon(instance);
 } */
 
-void (*old_bypass)(void *instance, void *reason);
+/*void (*old_bypass)(void *instance, void *reason);
 void bypass(void*instance, void *reason){
 return;
 }
 
 void (*old_bypass2)(void *instance, int oid);
 void bypass2(void *instance, int oid){
-}
+} 
 
 void (*old_bypass3)(void *instance, int reason);
 void bypass3(void *instance, int reason){
-}
+} */
 
 
 
@@ -180,7 +180,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
             ImGui::Checkbox("Esp Line", &espLine);
             ImGui::Checkbox("Esp Rectangle", &espRectangle);
-            ImGui::Checkbox("No Recoil", &NoRecoil);
+       //     ImGui::Checkbox("No Recoil", &NoRecoil);
         //    ImGui::Checkbox("Unlimited Ammo", &UnlimitedAmmo);
         }
     }
