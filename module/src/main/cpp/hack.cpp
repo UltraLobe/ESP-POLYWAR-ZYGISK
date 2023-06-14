@@ -81,19 +81,18 @@ void SetupImGui() {
 
 
 void DrawESP(ImDrawList *draw) {
-if (esp.isValid()) {
 if (espLine || espRectangle) {
-if (espManager->enemies.size(); i++) {
+for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
     if (obj != NULL) {
         Vector3 objPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
            continue;
            Vector3 objHeadPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
-           Vector2 toTarget = Vector2(objPos.x, get_systemHeight() - objPos.y);
+           Vector2 toTarget = Vector2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);
            float rectHeight = abs(objHeadPos.y - objPos.y);
            float rectWidth = 0.6 * rectHeight;
-           Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight() - objPos.y, rectWidth, -rectHeight);
+           Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight(D_get_main()) - objPos.y, rectWidth, -rectHeight);
            if (espLine){
           ESP::DrawLine(Vector2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main()), toTarget), ImColor(255, 255, 255, 255), 2);
               }
@@ -103,9 +102,6 @@ if (espManager->enemies.size(); i++) {
              }
             }
            }
-          }
-         }
-        } 
     
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
 EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
