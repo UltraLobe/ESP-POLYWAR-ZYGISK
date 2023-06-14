@@ -60,7 +60,7 @@ int (*get_Owner)(void *instance);
 void (*old_upDate)(void*instance);
 void upDate(void*instance){
 	if (instance!=NULL){
-		bool dead = *(bool *) ((uint32_t) instance + 0x18);//class Pawn, field: bool dead, 
+		bool dead = *(bool *) ((uintptr_t) instance + 0x28);//class Pawn, field: bool dead, 
 		if (get_Team(instance) && get_Owner(instance) && !dead)
 		    espManager->tryAddEnemy(instance);
 	        else

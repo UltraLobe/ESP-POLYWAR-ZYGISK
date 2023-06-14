@@ -138,7 +138,8 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
         Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
            continue;
-           Vector3 objHeadPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
+  //         Vector3 objHeadPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
+           Vector3 objHeadPos = WorldToScreenPoint(C_get_main(), Vector3(get_position(get_transform(obj)).x, get_position(get_transform(obj)).y + 1.6, get_position(get_transform(obj)).z));
            ImVec2 toTarget = ImVec2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);
            float rectHeight = abs(objHeadPos.y - objPos.y);
            float rectWidth = 0.6 * rectHeight;
