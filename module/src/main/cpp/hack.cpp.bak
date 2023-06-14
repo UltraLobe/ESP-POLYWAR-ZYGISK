@@ -135,9 +135,10 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
             ImGui::Checkbox("No Recoil", &NoRecoil);
-    /*        if (ImGui::BeginTabItem("Esp Menu")) {
+            if (ImGui::BeginTabItem("Esp Menu")) {
             ImGui::Checkbox("Esp Line", &espLine);
-             ImGui::Checkbox("Esp Rectangle", &espRetangle); */
+             ImGui::Checkbox("Esp Rectangle", &espRetangle); 
+             }
         }
     }
     ImGui::EndTabItem();
