@@ -56,7 +56,7 @@ void noRecoil(void*instance) {
 if (instance!=NULL && NoRecoil) {
 return;
 }
-return old_noRecoil(instance) ;
+return old_noRecoil(instance);
 }
 
 void (*old_upDate)(void *instance);
