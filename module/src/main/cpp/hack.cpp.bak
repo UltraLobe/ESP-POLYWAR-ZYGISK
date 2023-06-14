@@ -16,8 +16,8 @@
 #include "Unity/Rect.h"
 #include "Unity/Vector2.h"
 #include "Unity/Vector3.h"
-#include "includes/ESPOverlay.h"
 #include "includes/ESPManager.h"
+#include "includes/ESPOverlay.h"
 //#include "Unity/Obscured.h
 #include "imgui_impl_android.h"
 #include "imgui_impl_opengl3.h"
@@ -54,9 +54,21 @@ void *(*C_get_main)();
 void (*old_noRecoil) (void*instance);
 void noRecoil(void*instance) {
 if (instance!=NULL && NoRecoil) {
+
 return;
 }
 return old_noRecoil(instance) ;
+}
+
+void (*old_upDate)(void *instance);
+void upDate(void *instance){
+if (instance!=NULL){
+espManager->tryAddEnemy(instance);
+}else{
+espManager->removeEnemyGivenObject(instance);
+}
+}
+old_upDate(instance);
 }
 
 
