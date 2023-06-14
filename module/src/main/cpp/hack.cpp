@@ -134,11 +134,9 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     ImGui::Begin("MGR Team - Sausage Man");
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
-            ImGui::Checkbox("No Recoil", &NoRecoil);
-            if (ImGui::BeginTabItem("Esp Menu")) {
             ImGui::Checkbox("Esp Line", &espLine);
-             ImGui::Checkbox("Esp Rectangle", &espRectangle); 
-             }
+            ImGui::Checkbox("Esp Rectangle", &espRectangle);
+            ImGui::Checkbox("No Recoil", &NoRecoil);
         }
     }
     ImGui::EndTabItem();

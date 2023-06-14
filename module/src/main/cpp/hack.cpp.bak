@@ -137,7 +137,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
             ImGui::Checkbox("No Recoil", &NoRecoil);
             if (ImGui::BeginTabItem("Esp Menu")) {
             ImGui::Checkbox("Esp Line", &espLine);
-             ImGui::Checkbox("Esp Rectangle", &espRetangle); 
+             ImGui::Checkbox("Esp Rectangle", &espRectangle); 
              }
         }
     }
