@@ -32,7 +32,7 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool NoRecoil;
-bool UnlimitedAmmo;
+//bool UnlimitedAmmo;
 bool espLine;
 bool espRectangle; 
 
@@ -85,14 +85,14 @@ return old_noRecoil(instance);
 }
 
 
-void (*old_updateWeapon)(void*instance);
+/*void (*old_updateWeapon)(void*instance);
 void updateWeapon(void *instance){
 if (UnlimitedAmmo){
 *(int*) ((uintptr_t) instance + 0x2A0 + 0x8) = 999999999;
 *(int*) ((uintptr_t) instance + 0x2AC + 0x8) = 999999999;
  }
 return old_updateWeapon(instance);
-}
+} */
 
 void (*old_bypass)(void *instance, void *reason);
 void bypass(void*instance, void *reason){
@@ -181,7 +181,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
             ImGui::Checkbox("Esp Line", &espLine);
             ImGui::Checkbox("Esp Rectangle", &espRectangle);
             ImGui::Checkbox("No Recoil", &NoRecoil);
-            ImGui::Checkbox("Unlimited Ammo", &UnlimitedAmmo);
+        //    ImGui::Checkbox("Unlimited Ammo", &UnlimitedAmmo);
         }
     }
     ImGui::EndTabItem();
@@ -206,7 +206,7 @@ void hack_start(const char *_game_data_dir) {
     // TODO: hooking/patching here
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14711C0), (void *) noRecoil, (void **) &old_noRecoil);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147306C), (void *) upDate, (void **) &old_upDate);
-      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x15AE930), (void*) updateWeapon,(void**)&old_updateWeapon);                  
+   //   DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x15AE930), (void*) updateWeapon,(void**)&old_updateWeapon);                  
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14F2478), (void *) bypass,(void**)&old_bypass);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14C6C78), (void *) bypass2,(void**)&old_bypass2);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1824DA4), (void *) bypass3,(void**)&old_bypass3);

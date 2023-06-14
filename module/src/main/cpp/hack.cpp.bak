@@ -210,7 +210,7 @@ void hack_start(const char *_game_data_dir) {
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14F2478), (void *) bypass,(void**)&old_bypass);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14C6C78), (void *) bypass2,(void**)&old_bypass2);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1824DA4), (void *) bypass3,(void**)&old_bypass3);
-                                         
+      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147E058), (void *) onDestroy,(void**)&old_onDestroy);                            
                                                                                                                
     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int get_systemWidth() { }
