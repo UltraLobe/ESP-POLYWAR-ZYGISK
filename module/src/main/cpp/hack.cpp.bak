@@ -69,7 +69,6 @@ if (get_Team(instance) && !dead)
 espManager->tryAddEnemy(instance);
 else
 espManager->removeEnemyGivenObject(instance);
-  }
 }
 old_upDate(instance);
 }
