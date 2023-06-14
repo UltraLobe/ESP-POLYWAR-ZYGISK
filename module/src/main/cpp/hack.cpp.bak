@@ -166,7 +166,7 @@ void hack_start(const char *_game_data_dir) {
 
     // TODO: hooking/patching here
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14711C0), (void *) noRecoil, (void **) &old_noRecoil);
-      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1235667), (void *) upDate, (void **) &old_upDate);
+      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147306C), (void *) upDate, (void **) &old_upDate);
       
     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
