@@ -62,8 +62,9 @@ if (instance!=NULL){
 //bool dead = *(bool *) ((uintptr_t) instance + 0x28);
 //if (get_Team(instance) && !dead)
 espManager->tryAddEnemy(instance);
-}else{
-espManager->removeEnemyGivenObject(instance);
+//}else{
+/*espManager->removeEnemyGivenObject(instance);
+} */
 }
 old_upDate(instance);
 }
@@ -221,7 +222,7 @@ void hack_start(const char *_game_data_dir) {
     get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12BB7B4);
     WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule.start_address + 0xD13944);
     C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD13EE0); 
-//    get_Team = (int (*) (void*)) ((uintptr_t) g_TargetModule.start_address + 0x1466B78);
+//   get_Team = (int (*) (void*)) ((uintptr_t) g_TargetModule.start_address + 0x1466B78);
     
     
     
