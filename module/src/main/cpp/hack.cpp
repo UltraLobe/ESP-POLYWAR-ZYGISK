@@ -30,8 +30,8 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool NoRecoil;
-bool espLine;
-bool espRectangle;
+/*bool espLine;
+bool espRectangle; */
 
 HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     origInput(thiz, ex_ab, ex_ac);
@@ -45,10 +45,10 @@ int (*get.systemWidth)(void *instance);
 int (*get.systemHeight)(void *instance);
 void *(*D_get_main)();
 
-void *(get_transform)(void *instance);
+/*void *(get_transform)(void *instance);
 Vector3 (*get_position)(void *instance);
 Vector3 (*WorldToScreenPoint)(void *instance, Vector3 position);
-void *(*C_get_main)();
+void *(*C_get_main)(); */
 
 
 
@@ -81,7 +81,7 @@ void SetupImGui() {
 }
 
 
-void DrawESP(ImDrawList *draw) {
+/*void DrawESP(ImDrawList *draw) {
 if (esp.isValid()) {
 if (espLine || espRectangle) {
 if (espManager->enemies.size(); i++) {
@@ -106,7 +106,7 @@ if (espManager->enemies.size(); i++) {
            }
           }
          }
-        }
+        } */
     
 
 
@@ -125,7 +125,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     if (libLoaded)
     
     
-   SetResolution(get_systemWidth(get_main()), get_systemHeight(get_main()), true);
+   SetResolution(get.systemWidth(D_get_main()), get.systemHeight(D_get_main()), true);
 
 
     ImGui_ImplOpenGL3_NewFrame();
@@ -139,8 +139,8 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
             ImGui::Checkbox("No Recoil", &NoRecoil);
             if (ImGui::BeginTabItem("Esp Menu")) {
-             ImGui::Checkbox("Esp Line", &espLine);
-             ImGui::Checkbox("Esp Rectangle", &espRetangle);
+      /*       ImGui::Checkbox("Esp Line", &espLine);
+             ImGui::Checkbox("Esp Rectangle", &espRetangle); */
         }
     }
     ImGui::EndTabItem();
@@ -171,10 +171,10 @@ void hack_start(const char *_game_data_dir) {
     get.systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
      
-    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
+/*    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
     get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule_start_address + 0x12355);
     WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule_start_address + 0x12345);
-    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356);
+    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356); */
     
     
     
