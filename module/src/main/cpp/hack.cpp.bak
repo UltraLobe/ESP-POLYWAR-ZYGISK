@@ -55,18 +55,6 @@ void *(*C_get_main)();
 int (*get_Team)(void *instance);
 
 
-void (*old_noRecoil) (void*instance);
-void noRecoil(void*instance) {
-if (instance!=NULL && NoRecoil) {
-return;
-}
-return old_noRecoil(instance);
-}
-
-void (*old_bypass)(void *instance);
-void bypass(void*instance){
-return;
-}
 
 void (*old_upDate)(void *instance);
 void upDate(void *instance){
@@ -80,6 +68,15 @@ espManager->removeEnemyGivenObject(instance);
 old_upDate(instance);
 }
 
+void (*old_noRecoil) (void*instance);
+void noRecoil(void*instance) {
+if (instance!=NULL && NoRecoil) {
+return;
+}
+return old_noRecoil(instance);
+}
+
+
 void (*old_updateWeapon)(void*instance);
 void updateWeapon(void *instance){
 if (UnlimitedAmmo){
@@ -87,6 +84,19 @@ if (UnlimitedAmmo){
 *(int*) ((uintptr_t) instance + 0x2AC + 0x8) = 999999999;
  }
 return old_updateWeapon(instance);
+}
+
+void (*old_bypass)(void *instance, void *reason);
+void bypass(void*instance, void *reason){
+return;
+}
+
+void (*old_bypass2)(void *instance, int oid);
+void bypass2(void *instance, int oid){
+}
+
+void (*old_bypass3)(void *instance, int reason);
+void bypass3(void *instance, int reason){
 }
 
 
@@ -190,6 +200,7 @@ void hack_start(const char *_game_data_dir) {
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147306C), (void *) upDate, (void **) &old_upDate);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x15AE930), (void*) updateWeapon,(void**)&old_updateWeapon);                  
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14F2478), (void *) bypass,(void**)&old_bypass);
+      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14C6C78), (void *) bypass2,(void**)&old_bypass2);
                                           
     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int get_systemWidth() { }
