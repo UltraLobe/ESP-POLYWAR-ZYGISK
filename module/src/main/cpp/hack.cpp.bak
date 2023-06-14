@@ -19,7 +19,7 @@
 #include "Unity/Vector2.h"
 #include "Unity/Vector3.h"
 #include "Unity/Rect.h"
-#include "Obscured.h"
+#include "Unity/Obscured.h"
 #include "includes/ESPManager.h"
 #include "includes/ESPOverlay.h"
 //#include "Unity/Obscured.h

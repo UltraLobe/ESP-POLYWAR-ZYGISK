@@ -158,7 +158,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
             ImGui::Checkbox("Esp Line", &espLine);
             ImGui::Checkbox("Esp Rectangle", &espRectangle);
             ImGui::Checkbox("No Recoil", &NoRecoil);
-            ImGui::CheckBox("Unlimited Ammo", &UnlimitedAmmo);
+            ImGui::Checkbox("Unlimited Ammo", &UnlimitedAmmo);
         }
     }
     ImGui::EndTabItem();
