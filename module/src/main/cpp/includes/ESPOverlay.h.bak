@@ -25,7 +25,7 @@ namespace ESP {
 	
 	void DrawHorizontalHealthBar(Vector2 screenPos, float width, float maxHealth, float currentHealth) {
 		screenPos -= Vector2(0.0f, 8.0f);
-		DrawBox(Rect(screenPos.x, screenPos.y, width + 2, 5.0f), ImColor(0, 0, 0, 255), 3);
+		DrawBox(Rect(screenPos.X, screenPos.Y, width + 2, 5.0f), ImColor(0, 0, 0, 255), 3);
 		screenPos += Vector2(1.0f, 1.0f);
 		ImColor clr = ImColor(0, 255, 0, 255);
 		float hpWidth = (currentHealth * width) / maxHealth;
@@ -35,7 +35,7 @@ namespace ESP {
 		if (currentHealth < (maxHealth * 0.3)) {
 			clr = ImColor(255, 0, 0, 255);
 		}
-		DrawBox(Rect(screenPos.x, screenPos.y, hpWidth, 3.0f), clr, 3);
+		DrawBox(Rect(screenPos.X, screenPos.Y, hpWidth, 3.0f), clr, 3);
 	}
 	
     void DrawCircle(float X, float Y, float radius, bool filled, ImVec4 color) {
