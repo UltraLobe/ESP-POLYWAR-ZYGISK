@@ -78,8 +78,8 @@ old_upDate(instance);
 void (*old_updateWeapon)(void*instance);
 void updateWeapon(void *instance){
 if (UnlimitedAmmo){
-*(int*) ((uintptr_t) instance + 0x2A0 + 0x12) = 999999999;
-*(int*) ((uintptr_t) instance + 0x2AC + 0x12) = 999999999;
+*(int*) ((uintptr_t) instance + 0x2A0 + 0x8) = 999999999;
+*(int*) ((uintptr_t) instance + 0x2AC + 0x8) = 999999999;
  }
 return old_updateWeapon(instance);
 }
