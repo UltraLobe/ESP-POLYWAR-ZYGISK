@@ -19,6 +19,7 @@
 #include "Unity/Vector2.h"
 #include "Unity/Vector3.h"
 #include "Unity/Rect.h"
+#include "Obscured.h"
 #include "includes/ESPManager.h"
 #include "includes/ESPOverlay.h"
 //#include "Unity/Obscured.h
@@ -31,6 +32,7 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool NoRecoil;
+bool UnlimitedAmmo;
 bool espLine;
 bool espRectangle; 
 
@@ -72,6 +74,16 @@ espManager->removeEnemyGivenObject(instance);
 }
 old_upDate(instance);
 }
+
+void (*old_updateWeapon)(void*instance);
+void updateWeapon(void *instance){
+if (UnlimitedAmmo){
+*(int*) ((uintptr_t) instance + 0x2A0 + 0x12) = 999999999;
+*(int*) ((uintptr_t) instance + 0x2AC + 0x12) = 999999999;
+ }
+return old_updateWeapon(instance);
+}
+
 
 
 void SetupImGui() {
@@ -146,6 +158,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
             ImGui::Checkbox("Esp Line", &espLine);
             ImGui::Checkbox("Esp Rectangle", &espRectangle);
             ImGui::Checkbox("No Recoil", &NoRecoil);
+            ImGui::CheckBox("Unlimited Ammo", &UnlimitedAmmo);
         }
     }
     ImGui::EndTabItem();
@@ -170,7 +183,8 @@ void hack_start(const char *_game_data_dir) {
     // TODO: hooking/patching here
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x14711C0), (void *) noRecoil, (void **) &old_noRecoil);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x147306C), (void *) upDate, (void **) &old_upDate);
-      
+      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x15AE930), (void*) updateWeapon,(void**)&old_updateWeapon);                  
+                                           
     SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0xA361EC); //class Screen, method: public static Void SetResolution(Int32 width, Int32 height, Boolean fullscreen) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1ADCC);//class Display, method: public Int32 get_systemWidth() { }
     get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
