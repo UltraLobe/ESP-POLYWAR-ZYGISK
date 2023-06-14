@@ -145,10 +145,12 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
            float rectWidth = 0.6 * rectHeight;
            Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight(D_get_main()) - objPos.y, rectWidth, -rectHeight);
            if (espLine){
-          ESP::DrawLine(ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())),  toTarget, ImColor(255, 255, 255, 255), 2);
-              }
+     //     ESP::DrawLine(ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())),  toTarget, ImColor(255, 255, 255, 255), 2);
+            ESP::drawLine(ImColor(255, 255, 255, 255), 2, ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())), toTarget);
+             }
            if (espRectangle)
-              ESP::DrawBox(rectSize, ImColor(255, 0, 0, 255), 2);
+     //         ESP::DrawBox(rectSize, ImColor(255, 0, 0, 255), 2);
+              ESP::drawRect(ImColor(255, 0, 0, 255), 2, rectSize);
               }
              }
             }
