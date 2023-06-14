@@ -89,7 +89,7 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
         if (objPos.z < 0) 
            continue;
            Vector3 objHeadPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)) + Vector3(0, 1.7, 0));
-           ImVec2 toTarget = Vector2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);
+           ImVec2 toTarget = ImVec2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);
            float rectHeight = abs(objHeadPos.y - objPos.y);
            float rectWidth = 0.6 * rectHeight;
            Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight(D_get_main()) - objPos.y, rectWidth, -rectHeight);
