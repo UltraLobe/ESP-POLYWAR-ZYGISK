@@ -30,8 +30,8 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool NoRecoil;
-/*bool espLine;
-bool espRectangle; */
+bool espLine;
+bool espRectangle; 
 
 HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     origInput(thiz, ex_ab, ex_ac);
