@@ -108,9 +108,6 @@ if (espManager->enemies.size(); i++) {
          }
         } */
     
-
-
-
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
 EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     eglQuerySurface(dpy, surface, EGL_WIDTH, &g_GlWidth);
@@ -138,8 +135,8 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
             ImGui::Checkbox("No Recoil", &NoRecoil);
-            if (ImGui::BeginTabItem("Esp Menu")) {
-      /*       ImGui::Checkbox("Esp Line", &espLine);
+    /*        if (ImGui::BeginTabItem("Esp Menu")) {
+            ImGui::Checkbox("Esp Line", &espLine);
              ImGui::Checkbox("Esp Rectangle", &espRetangle); */
         }
     }
