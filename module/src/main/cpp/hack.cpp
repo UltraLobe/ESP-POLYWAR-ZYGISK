@@ -13,10 +13,10 @@
 #include "utils.h"
 #include "xdl.h"
 #include "imgui.h"
-/*#include "includes/ESPOverlay.h"
+#include "includes/ESPOverlay.h"
 #include "includes/ESPManager.h"
 #include "Unity/Rect.h"
-#include "Unity/Vector2"
+/*#include "Unity/Vector2"
 #include "Unity/Vector3"
 #include "Unity/Obscured.h */
 #include "imgui_impl_android.h"
@@ -45,11 +45,10 @@ int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*D_get_main)();
 
-/*void *(get_transform)(void *instance);
+void *(get_transform)(void *instance);
 Vector3 (*get_position)(void *instance);
 Vector3 (*WorldToScreenPoint)(void *instance, Vector3 position);
-void *(*C_get_main)(); */
-
+void *(*C_get_main)(); 
 
 
 void (*old_noRecoil) (void*instance);
@@ -81,7 +80,7 @@ void SetupImGui() {
 }
 
 
-/*void DrawESP(ImDrawList *draw) {
+void DrawESP(ImDrawList *draw) {
 if (esp.isValid()) {
 if (espLine || espRectangle) {
 if (espManager->enemies.size(); i++) {
@@ -106,7 +105,7 @@ if (espManager->enemies.size(); i++) {
            }
           }
          }
-        } */
+        } 
     
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
 EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
@@ -129,7 +128,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     ImGui_ImplAndroid_NewFrame(g_GlWidth, g_GlHeight);
     ImGui::NewFrame();
     
-    //DrawESP(ImGui::GetBackgroundDrawList());
+    DrawESP(ImGui::GetBackgroundDrawList());
 
     ImGui::Begin("MGR Team - Sausage Man");
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
@@ -167,10 +166,10 @@ void hack_start(const char *_game_data_dir) {
     get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0xD1AEC4);//class Display, method: public Int32 get_systemHeight() { }
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0xD1B0BC);//class Display, method: public static Display get_main() { } 
      
-/*    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
+    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x12345);
     get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule_start_address + 0x12355);
     WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule_start_address + 0x12345);
-    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356); */
+    C_get_main = (void *(*) ()) ((uintptr_t) g_TargetModule.start_address + 0x12356); 
     
     
     
