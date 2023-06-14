@@ -81,9 +81,8 @@ void SetupImGui() {
 
 
 void DrawESP(ImDrawList *draw) {
-if (esp.isValid()) {
 if (espLine || espRectangle) {
-if (espManager->enemies.size(); i++) {
+for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
     if (obj != NULL) {
         Vector3 objPos = WordToScreenPoint(C_get_main(), get_position(get_transform(obj)));
@@ -103,9 +102,6 @@ if (espManager->enemies.size(); i++) {
              }
             }
            }
-          }
-         }
-        } 
     
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
 EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
