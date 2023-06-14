@@ -45,7 +45,7 @@ int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*D_get_main)();
 
-void *(get_transform)(void *instance);
+void *(*get_transform)(void *instance);
 Vector3 (*get_position)(void *instance);
 Vector3 (*WorldToScreenPoint)(void *instance, Vector3 position);
 void *(*C_get_main)(); 
