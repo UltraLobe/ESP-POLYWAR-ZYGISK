@@ -24,7 +24,6 @@
 #include "includes/ESPOverlay.h"
 //#include "Unity/Obscured.h
 
-
 static int                  g_GlHeight, g_GlWidth;
 static bool                 g_IsSetup = false;
 static std::string          g_IniFileName = "";
@@ -55,8 +54,6 @@ void *(*C_get_main)();
 int (*get_Team)(void *instance);
 int (*get_Owner)(void *instance);
 
-
-
 void (*old_upDate)(void*instance);
 void upDate(void*instance){
 	if (instance!=NULL){
@@ -66,7 +63,7 @@ void upDate(void*instance){
 	        else
 		        espManager->removeEnemyGivenObject(instance); 
 		        }
-old_upDate(instance);
+  old_upDate(instance);
 }
 
 void (*old_onDestroy)(void*instance);
@@ -109,7 +106,6 @@ void bypass3(void *instance, int reason){
 } */
 
 
-
 void SetupImGui() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -145,12 +141,12 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
            float rectWidth = 0.6 * rectHeight;
            Rect rectSize = Rect(objPos.x - rectWidth /2, get_systemHeight(D_get_main()) - objPos.y, rectWidth, -rectHeight);
            if (espLine){
-     //     ESP::DrawLine(ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())),  toTarget, ImColor(255, 255, 255, 255), 2);
-            ESP::DrawLine(ImColor(255, 255, 255, 255), 2, ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())), toTarget);
+          ESP::DrawLine(ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())),  toTarget, ImColor(255, 255, 255, 255), 2);
+         //   ESP::DrawLine(ImColor(255, 255, 255, 255), 2, ImVec2(get_systemWidth(D_get_main()) / 2, get_systemHeight(D_get_main())), toTarget);
              }
            if (espRectangle)
-     //         ESP::DrawBox(rectSize, ImColor(255, 0, 0, 255), 2);
-              ESP::DrawBox(ImColor(255, 0, 0, 255), 2, rectSize);
+             ESP::DrawBox(rectSize, ImColor(255, 0, 0, 255), 2);
+           //   ESP::DrawBox(ImColor(255, 0, 0, 255), 2, rectSize);
               }
              }
             }
