@@ -89,7 +89,7 @@ void DrawESP(ImDrawList *draw) {
 if (espLine || espRectangle) {
 for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
-   if (get_main != NULL){
+   if (C_get_main != NULL){
     if (obj != NULL) {
         Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
