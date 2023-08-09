@@ -83,9 +83,7 @@ void SetupImGui() {
     ImGui::GetStyle().ScaleAllSizes(3.0f);
 }
 
-
-//void DrawESP(ImDrawList *draw) {
-void DrawESP(int width, int height){
+void DrawESP(ImDrawList *draw){
 if (espLine) {
 if (C_get_main() != NULL){
 for (int i = 0; i < espManager->enemies.size(); i++) {
@@ -94,9 +92,9 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
         Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
            continue;       
-           ImVec2 toTarget = ImVec2(objPos.x, height - objPos.y);                
+           ImVec2 toTarget = ImVec2(objPos.x, get_systemHeight(D_get_main()) - objPos.y);                
            if (espLine){
-              ESP::DrawLine(ImVec2(width /2, height),  toTarget, ImColor(255, 255, 255, 255), 2);        
+              ESP::DrawLine(ImVec2(get_systemWidth(D_get_main()) /2, get_systemHeight(D_get_main())),  toTarget, ImColor(255, 255, 255, 255), 2);        
                }                          
               }
              }
