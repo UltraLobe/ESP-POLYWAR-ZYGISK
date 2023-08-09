@@ -31,6 +31,7 @@ static utils::module_info   g_TargetModule{};
 static bool libLoaded = false;
 
 bool espLine;
+bool espRectangle; 
 
 HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     origInput(thiz, ex_ab, ex_ac);
@@ -129,7 +130,8 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     ImGui::Begin("MGR Team - Sausage Man");
     if (ImGui::BeginTabBar("Tab", ImGuiTabBarFlags_FittingPolicyScroll)) {
         if (ImGui::BeginTabItem("Weapon Menu")) {
-            ImGui::Checkbox("Esp Line", &espLine);          
+            ImGui::Checkbox("Esp Line", &espLine);
+            ImGui::Checkbox("Esp Rectangle", &espRectangle);
        //     ImGui::Checkbox("No Recoil", &NoRecoil);
         //    ImGui::Checkbox("Unlimited Ammo", &UnlimitedAmmo);
         }
