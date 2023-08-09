@@ -87,9 +87,9 @@ void SetupImGui() {
 
 void DrawESP(ImDrawList *draw) {
 if (espLine || espRectangle) {
+if (C_get_main() != NULL){
 for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
-   if (C_get_main != NULL){
     if (obj != NULL) {
         Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
@@ -165,7 +165,7 @@ void hack_start(const char *_game_data_dir) {
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x928508), (void *) upDate, (void **) &old_upDate);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x937A18), (void *) onDestroy,(void**)&old_onDestroy);                            
                                                                                                                
-    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0x226336C); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
+    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0x2263300); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x22666F0);//class Display, method: public Int get_systemWidth() { }
     get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x226680C);//class Display, method: public Int get_systemHeight() { }
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x2266A50);//class Display, method: public static Display get_main() { } 
