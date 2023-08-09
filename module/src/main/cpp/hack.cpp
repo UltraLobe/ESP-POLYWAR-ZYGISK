@@ -94,7 +94,7 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
         Vector3 objPos = WorldToScreenPoint(C_get_main(), get_position(get_transform(obj)));
         if (objPos.z < 0) 
            continue;       
-           ImVec2 toTarget = ImVec2(objPos.x, height(D_get_main()) - objPos.y);                
+           ImVec2 toTarget = ImVec2(objPos.x, height - objPos.y);                
            if (espLine){
               ESP::DrawLine(ImVec2(width /2, height),  toTarget, ImColor(255, 255, 255, 255), 2);        
                }                          
