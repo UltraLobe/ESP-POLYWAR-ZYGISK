@@ -38,8 +38,6 @@ HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     return;
 }
 
-jsjsjs
-
 //void (*SetResolution)(int width, int height, bool fullscreen);
 /*int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
