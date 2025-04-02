@@ -3,6 +3,6 @@
 
 // TODO: change this
 #define TargetLibName "libil2cpp.so"
-#define GamePackageName "com.nobodyshot.POLYWAR"
+#define GamePackageName "com.aldagames.zombieshooter"
 
 #endif //ZYGISK_IMGUI_MODMENU_GAME_H
