@@ -38,7 +38,7 @@ HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     return;
 }
 
-void (*SetResolution)(int width, int height, bool fullscreen);
+//void (*SetResolution)(int width, int height, bool fullscreen);
 int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*D_get_main)();
@@ -116,7 +116,7 @@ EGLBoolean hook_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface) {
     if (libLoaded)
     
     
-   SetResolution(get_systemWidth(D_get_main()), get_systemHeight(D_get_main()), true);
+   //SetResolution(get_systemWidth(D_get_main()), get_systemHeight(D_get_main()), true);
 
 
     ImGui_ImplOpenGL3_NewFrame();
@@ -156,7 +156,7 @@ void hack_start(const char *_game_data_dir) {
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bbdb18), (void *) upDate, (void **) &old_upDate);
       DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bc955c), (void *) onDestroy,(void**)&old_onDestroy);                            
                                                                                                                
-    SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0x2753a34); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
+    //SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0x2753a34); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
     get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x376158c);//class Display, method: public Int get_systemWidth() { }
     get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x3761674);//class Display, method: public Int get_systemHeight() { }
     D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x37618d8);//class Display, method: public static Display get_main() { } 
