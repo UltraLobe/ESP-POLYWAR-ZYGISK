@@ -39,7 +39,7 @@ HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
 }
 
 //void (*SetResolution)(int width, int height, bool fullscreen);
-int (*get_systemWidth)(void *instance);
+/*int (*get_systemWidth)(void *instance);
 int (*get_systemHeight)(void *instance);
 void *(*D_get_main)();
 
@@ -62,7 +62,7 @@ void onDestroy(void*instance){
 	   espManager->removeEnemyGivenObject(instance);
 	}
 	old_onDestroy(instance);
-   }
+   }*/
 
 void SetupImGui() {
     IMGUI_CHECKVERSION();
@@ -84,7 +84,7 @@ void SetupImGui() {
 }
 
 void DrawESP(ImDrawList *draw){
-if (espLine) {
+/*if (espLine) {
 if (C_get_main() != NULL){
 for (int i = 0; i < espManager->enemies.size(); i++) {
    void *obj = espManager->enemies[i]->object;
@@ -99,7 +99,7 @@ for (int i = 0; i < espManager->enemies.size(); i++) {
               }
              }
             }
-           }
+           }*/
          }
     
 EGLBoolean (*old_eglSwapBuffers)(EGLDisplay dpy, EGLSurface surface);
@@ -153,18 +153,18 @@ void hack_start(const char *_game_data_dir) {
     LOGI("%s: %p - %p",TargetLibName, g_TargetModule.start_address, g_TargetModule.end_address);
 
     // TODO: hooking/patching here
-      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bbdb18), (void *) upDate, (void **) &old_upDate);
-      DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bc955c), (void *) onDestroy,(void**)&old_onDestroy);                            
+      //DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bbdb18), (void *) upDate, (void **) &old_upDate);
+      //DobbyHook((void *) ((uintptr_t) g_TargetModule.start_address + 0x1bc955c), (void *) onDestroy,(void**)&old_onDestroy);                            
                                                                                                                
     //SetResolution = (void (*)(int, int, bool)) ((uintptr_t) g_TargetModule.start_address + 0x2753a34); //class Screen, method: public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate) { }
-    get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x376158c);//class Display, method: public Int get_systemWidth() { }
-    get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x3761674);//class Display, method: public Int get_systemHeight() { }
-    D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x37618d8);//class Display, method: public static Display get_main() { } 
+    //get_systemWidth = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x376158c);//class Display, method: public Int get_systemWidth() { }
+    //get_systemHeight = (int (*)(void *)) ((uintptr_t) g_TargetModule.start_address + 0x3761674);//class Display, method: public Int get_systemHeight() { }
+    //D_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x37618d8);//class Display, method: public static Display get_main() { } 
      
-    get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x378ca8c);
-    get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x3799654);
-    WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule.start_address + 0x3758170);
-    C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x37586c8); 
+    //get_transform = (void *(*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x378ca8c);
+    //get_position = (Vector3 (*) (void *)) ((uintptr_t) g_TargetModule.start_address + 0x3799654);
+    //WorldToScreenPoint = (Vector3 (*) (void *, Vector3)) ((uintptr_t) g_TargetModule.start_address + 0x3758170);
+    //C_get_main = (void *(*)()) ((uintptr_t) g_TargetModule.start_address + 0x37586c8); 
     
     
     libLoaded = true;
