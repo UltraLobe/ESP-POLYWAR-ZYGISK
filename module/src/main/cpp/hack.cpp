@@ -1,4 +1,4 @@
-#include <cstdint>
+j#include <cstdint>
 #include <cstring>
 #include <cstdio>
 #include <unistd.h>
@@ -37,6 +37,8 @@ HOOKAF(void, Input, void *thiz, void *ex_ab, void *ex_ac) {
     ImGui_ImplAndroid_HandleInputEvent((AInputEvent *)thiz);
     return;
 }
+
+jsjsjs
 
 //void (*SetResolution)(int width, int height, bool fullscreen);
 /*int (*get_systemWidth)(void *instance);
